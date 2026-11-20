@@ -15,7 +15,7 @@
         .header { text-align: center; margin-bottom: 32px; }
         .header h1 { font-family: 'DM Sans', sans-serif; font-size: 3rem; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.025em; }
         .header p { font-size: 14px; color: var(--text-muted); }
-        .search-wrapper { margin-bottom: 32px; }
+        .search-wrapper { margin-bottom: 32px; position: relative; }
         #searchInput { width: 100%; padding: 12px 16px; background: #FFFFFF; border: 1.5px solid #E4EAF0; border-radius: 8px; color: var(--text-white); font-size: 16px; font-family: 'Inter', sans-serif; transition: border-color 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
         #searchInput:focus { outline: none; border-color: var(--color-teal); }
         #searchInput::placeholder { color: var(--text-muted); }
@@ -4712,18 +4712,36 @@
         document.getElementById('searchForm').addEventListener('submit', e => { e.preventDefault(); doSearch(); });
         document.getElementById('searchBtn').addEventListener('click', e => { e.preventDefault(); doSearch(); });
 
+        // Live search as-you-type (debounced 250ms) — fixes mobile where button tap is friction
+        let _searchTimer = null;
+        searchInput.addEventListener('input', function() {
+            clearTimeout(_searchTimer);
+            _searchTimer = setTimeout(doSearch, 250);
+        });
+
         function doSearch() {
             const query = searchInput.value.trim();
-            if (query.length < 2) return;
-            const matches = playersData.filter(p => p.name.toLowerCase().includes(query.toLowerCase()));
+            if (query.length < 2) {
+                dropdown.classList.remove('active');
+                return;
+            }
+            // Filter out placeholder names (Player 1, Player 2 etc)
+            const matches = playersData.filter(p => p.name && !p.name.match(/^Player \d+$/) && p.name.toLowerCase().includes(query.toLowerCase()));
             if (matches.length === 0) {
-                dropdown.innerHTML = '<div style="padding:10px 16px;color:#9ca3af">No players found. Try: Flagg, Curry, LeBron</div>';
+                dropdown.innerHTML = '<div style="padding:10px 16px;color:#475569;font-size:13px;">No players found. Try: Flagg, Tatum, LeBron, Wemby</div>';
                 dropdown.classList.add('active');
+                // Clear previous card so stale result doesn't linger
+                currentPlayer = null;
+                playerInfo.style.display = 'none';
+                baseCardWrapper.style.display = 'none';
+                pricingSection.style.display = 'none';
+                rookieSection.style.display = 'none';
+                emptyState.style.display = 'block';
             } else if (matches.length === 1) {
                 selectPlayer(matches[0]);
                 dropdown.classList.remove('active');
             } else {
-                dropdown.innerHTML = matches.map((p, i) => `<div class="dropdown-item" data-idx="${i}">${p.name} - ${p.team}</div>`).join('');
+                dropdown.innerHTML = matches.map((p, i) => `<div class="dropdown-item" data-idx="${i}">${p.name} — ${p.team}</div>`).join('');
                 dropdown.classList.add('active');
                 window._searchMatches = matches;
                 dropdown.querySelectorAll('.dropdown-item').forEach(item => {
