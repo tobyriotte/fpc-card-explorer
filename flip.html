@@ -371,7 +371,7 @@
 <div class="option-label">Option A — Card Flip</div>
 <div class="option-desc">Tap the card to flip it. Front shows the photo. Back shows stats.</div>
 
-<div class="flip-scene" id="flipScene" onclick="document.getElementById('flipCard').classList.toggle('flipped'); updateHint()">
+<div class="flip-scene" id="flipScene" role="button" tabindex="0" aria-label="Flip card to see player stats">
   <div class="flip-card" id="flipCard">
 
     <!-- FRONT -->
@@ -480,10 +480,24 @@
 </div>
 
 <script>
+function toggleFlip() {
+  document.getElementById('flipCard').classList.toggle('flipped');
+  updateHint();
+}
 function updateHint() {
   const flipped = document.getElementById('flipCard').classList.contains('flipped');
   document.getElementById('hintText').textContent = flipped ? 'Tap again to flip back' : 'Tap the card to flip it';
 }
+var scene = document.getElementById('flipScene');
+// Handle both click (desktop) and touchend (mobile)
+scene.addEventListener('click', toggleFlip);
+scene.addEventListener('touchend', function(e) {
+  e.preventDefault(); // prevent ghost click
+  toggleFlip();
+});
+scene.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFlip(); }
+});
 </script>
 </body>
 </html>
