@@ -103,8 +103,8 @@
     </style>
 </head>
 <body>
-    <div style="padding:10px 16px;background:#060810;border-bottom:1px solid #1e2330;">
-        <a href="wireframe-review.html" style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#06b6d4;text-decoration:none;">Back to Wireframes</a>
+    <div style="padding:10px 16px;background:#F7F9FB;border-bottom:1px solid #E4EAF0;">
+        <a href="wireframe-review.html" style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0F766E;text-decoration:none;">Back to Wireframes</a>
     </div>
     <div class="container">
         <div class="header">
@@ -114,8 +114,8 @@
 
         <div class="search-wrapper">
             <form id="searchForm" style="display:flex;gap:8px">
-                <input type="text" id="searchInput" placeholder="Type a player name..." autocomplete="off" style="flex:1;padding:12px 16px;background:#1a1f2e;border:1px solid rgba(255,255,255,0.2);border-radius:6px;color:#e8eaf0;font-size:16px;font-family:'Inter',sans-serif">
-                <button type="submit" id="searchBtn" style="padding:12px 20px;background:#06b6d4;border:none;border-radius:6px;color:#000;font-family:'Bebas Neue',Impact,sans-serif;font-size:16px;letter-spacing:.05em;cursor:pointer">SEARCH</button>
+                <input type="text" id="searchInput" placeholder="Type a player name..." autocomplete="off" style="flex:1;padding:12px 16px;background:#FFFFFF;border:1px solid #E4EAF0;border-radius:6px;color:#0F172A;font-size:16px;font-family:'Inter',sans-serif">
+                <button type="submit" id="searchBtn" style="padding:12px 20px;background:#0F766E;border:none;border-radius:6px;color:#FFFFFF;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;letter-spacing:.05em;cursor:pointer">SEARCH</button>
                 <div class="search-dropdown" id="dropdown"></div>
             </form>
         </div>
@@ -137,10 +137,10 @@
             <div id="priceChartContainer" style="margin-bottom: 32px; display: none; position: relative;">
                 <div style="display: flex; gap: 8px; justify-content: center; margin-bottom: 16px;">
                     <button id="toggleRaw" class="chart-toggle-btn" data-mode="raw" style="background: var(--color-teal); color: #000; border: none; padding: 8px 16px; border-radius: 4px; font-weight: 600; font-size: 12px; text-transform: uppercase; cursor: pointer; letter-spacing: 0.05em;">Raw</button>
-                    <button id="toggleGraded" class="chart-toggle-btn" data-mode="graded" style="background: rgba(255, 255, 255, 0.1); color: var(--text-white); border: 1px solid rgba(255, 255, 255, 0.2); padding: 8px 16px; border-radius: 4px; font-weight: 600; font-size: 12px; text-transform: uppercase; cursor: pointer; letter-spacing: 0.05em;">Graded</button>
+                    <button id="toggleGraded" class="chart-toggle-btn" data-mode="graded" style="background: rgba(15, 118, 110, 0.1); color: var(--text-white); border: 1px solid #E4EAF0; padding: 8px 16px; border-radius: 4px; font-weight: 600; font-size: 12px; text-transform: uppercase; cursor: pointer; letter-spacing: 0.05em;">Graded</button>
                 </div>
                 <svg id="priceChart" width="600" height="200" style="display: block; margin: 0 auto; max-width: 100%;"></svg>
-                <div id="chartTooltip" style="position: fixed; background: #1a1f2e; border: 1px solid #06b6d4; color: #ffffff; padding: 12px 16px; border-radius: 6px; pointer-events: none; display: none; z-index: 1000; white-space: nowrap; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);"></div>
+                <div id="chartTooltip" style="position: fixed; background: #FFFFFF; border: 1px solid #E4EAF0; color: #0F172A; padding: 12px 16px; border-radius: 6px; pointer-events: none; display: none; z-index: 1000; white-space: nowrap; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);"></div>
             </div>
             <div class="pricing-note" id="pricingNote"></div>
         </div>
@@ -375,9 +375,9 @@
             grad.setAttribute('id', uid); grad.setAttribute('x1','0'); grad.setAttribute('y1','0');
             grad.setAttribute('x2','0'); grad.setAttribute('y2','1');
             const s1 = document.createElementNS('http://www.w3.org/2000/svg','stop');
-            s1.setAttribute('offset','0%'); s1.setAttribute('stop-color','#06b6d4'); s1.setAttribute('stop-opacity','0.22');
+            s1.setAttribute('offset','0%'); s1.setAttribute('stop-color','#0F766E'); s1.setAttribute('stop-opacity','0.22');
             const s2 = document.createElementNS('http://www.w3.org/2000/svg','stop');
-            s2.setAttribute('offset','100%'); s2.setAttribute('stop-color','#06b6d4'); s2.setAttribute('stop-opacity','0');
+            s2.setAttribute('offset','100%'); s2.setAttribute('stop-color','#0F766E'); s2.setAttribute('stop-opacity','0');
             grad.appendChild(s1); grad.appendChild(s2); defs.appendChild(grad);
             svg.appendChild(defs);
 
@@ -438,7 +438,7 @@
             // Line
             const line = document.createElementNS('http://www.w3.org/2000/svg','path');
             line.setAttribute('d', linePath);
-            line.setAttribute('stroke','#06b6d4'); line.setAttribute('stroke-width','2.5');
+            line.setAttribute('stroke','#0F766E'); line.setAttribute('stroke-width','2.5');
             line.setAttribute('fill','none'); line.setAttribute('stroke-linejoin','round');
             svg.appendChild(line);
 
@@ -447,7 +447,7 @@
             pts.forEach((pt,i) => {
                 const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
                 c.setAttribute('cx',pt.x); c.setAttribute('cy',pt.y);
-                c.setAttribute('r','3.5'); c.setAttribute('fill','#06b6d4');
+                c.setAttribute('r','3.5');                c.setAttribute('fill','#0F766E');
                 c.setAttribute('stroke','#f8fafc'); c.setAttribute('stroke-width','1.5');
                 c.dataset.idx = i;
                 dotsG.appendChild(c);
@@ -479,14 +479,14 @@
 
                 dotsG.querySelectorAll('circle').forEach((c,i) => {
                     c.setAttribute('r', i===idx ? '5.5' : '3.5');
-                    c.setAttribute('fill', i===idx ? '#22d3ee' : '#06b6d4');
+                    c.setAttribute('fill', i===idx ? '#0D5F58' : '#0F766E');
                 });
 
                 if (tooltipEl) {
                     const parts = d.date.split('-');
                     const mon = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][parseInt(parts[1])-1];
                     const dateStr = mon + ' ' + parseInt(parts[2]) + ', ' + parts[0];
-                    tooltipEl.innerHTML = '<div style="font-size:18px;font-weight:700;color:#22d3ee;line-height:1">$'+d.price.toFixed(2)+'</div><div style="font-size:11px;color:rgba(255,255,255,0.45);margin-top:3px">'+dateStr+'</div>';
+                    tooltipEl.innerHTML = '<div style="font-size:18px;font-weight:700;color:#0F766E;line-height:1">$'+d.price.toFixed(2)+'</div><div style="font-size:11px;color:#475569;margin-top:3px">'+dateStr+'</div>';
                     tooltipEl.style.display = 'block';
                     const cRect = (containerEl || svg.parentElement).getBoundingClientRect();
                     const absX = e.clientX - cRect.left;
@@ -499,7 +499,7 @@
             hit.addEventListener('mouseleave', function() {
                 xhair.style.display='none';
                 if (tooltipEl) tooltipEl.style.display='none';
-                dotsG.querySelectorAll('circle').forEach(c => { c.setAttribute('r','3.5'); c.setAttribute('fill','#06b6d4'); });
+                dotsG.querySelectorAll('circle').forEach(c => { c.setAttribute('r','3.5');                c.setAttribute('fill','#0F766E'); });
             });
         }
 
@@ -615,7 +615,7 @@
                                 <button class="rookie-chart-toggle-btn active" data-mode="raw">Raw</button>
                                 <button class="rookie-chart-toggle-btn" data-mode="graded">Graded</button>
                             </div>
-                            <div id="rookieChartTooltip" style="display:none;position:absolute;pointer-events:none;background:rgba(10,15,26,0.92);border:1px solid rgba(6,182,212,0.4);border-radius:8px;padding:8px 14px;font-family:Inter,sans-serif;white-space:nowrap;z-index:20;backdrop-filter:blur(8px)"></div>
+                            <div id="rookieChartTooltip" style="display:none;position:absolute;pointer-events:none;background:#FFFFFF;border:1px solid #E4EAF0;border-radius:8px;padding:8px 14px;font-family:Inter,sans-serif;white-space:nowrap;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,0.08)"></div>
                         </div>
                     </div>
                 `;
