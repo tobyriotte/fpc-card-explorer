@@ -4712,13 +4712,6 @@
         document.getElementById('searchForm').addEventListener('submit', e => { e.preventDefault(); doSearch(); });
         document.getElementById('searchBtn').addEventListener('click', e => { e.preventDefault(); doSearch(); });
 
-        // Live search as-you-type (debounced 250ms) — fixes mobile where button tap is friction
-        let _searchTimer = null;
-        searchInput.addEventListener('input', function() {
-            clearTimeout(_searchTimer);
-            _searchTimer = setTimeout(doSearch, 250);
-        });
-
         function doSearch() {
             const query = searchInput.value.trim();
             if (query.length < 2) {
@@ -4737,10 +4730,8 @@
                 pricingSection.style.display = 'none';
                 rookieSection.style.display = 'none';
                 emptyState.style.display = 'block';
-            } else if (matches.length === 1) {
-                selectPlayer(matches[0]);
-                dropdown.classList.remove('active');
             } else {
+                // Always show dropdown — never auto-select, let user choose
                 dropdown.innerHTML = matches.map((p, i) => `<div class="dropdown-item" data-idx="${i}">${p.name} — ${p.team}</div>`).join('');
                 dropdown.classList.add('active');
                 window._searchMatches = matches;
